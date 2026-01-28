@@ -1,0 +1,389 @@
+/* CSS cho demo CSS Units & Typography */
+
+/* 1) Thiết lập gốc: dùng rem cho đồng nhất, đồng thời hạn chế zoom quá mức */
+html {
+  /* Cơ sở: 1rem = 16px mặc định trình duyệt; có thể điều chỉnh để scale toàn cục */
+  font-size: 16px;
+}
+
+:root {
+  /* Thang typographic fluid: dùng clamp để tự co giãn theo viewport */
+  --step--2: clamp(0.75rem, 0.70rem + 0.2vw, 0.85rem);  /* nhỏ */
+  --step--1: clamp(0.875rem, 0.80rem + 0.3vw, 1rem);
+  --step-0:  clamp(1rem, 0.95rem + 0.4vw, 1.125rem);    /* body */
+  --step-1:  clamp(1.125rem, 1rem + 0.6vw, 1.375rem);   /* h4 */
+  --step-2:  clamp(1.25rem, 1.1rem + 0.8vw, 1.625rem);  /* h3 */
+  --step-3:  clamp(1.5rem, 1.3rem + 1.0vw, 2rem);       /* h2 */
+  --step-4:  clamp(2rem, 1.8rem + 1.5vw, 2.5rem);       /* h1 */
+
+  /* Tỷ lệ khoảng cách (spacing scale) theo rem để giữ nhịp layout */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+
+  /* Màu */
+  --bg: #0f172a;          /* slate-900 */
+  --surface: #121a2e;     /* tối hơn một chút */
+  --text: #e5e7eb;        /* slate-200 */
+  --muted: #94a3b8;       /* slate-400 */
+  --primary: #22d3ee;     /* cyan-400 */
+  --accent: #a78bfa;      /* violet-400 */
+}
+
+/* 2) Body và font mặc định */
+body {
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: var(--step-0);
+  line-height: 1.7; /* line-height thoáng để dễ đọc */
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg), #0b1020);
+  margin: 0;
+}
+
+/* Container width dùng % để fluid và max-width dùng ch để dựa vào chữ */
+.container {
+  width: min(92%, 72ch);  /* ch dựa trên độ rộng ký tự của font hiện tại */
+  margin: 0 auto;
+}
+
+/* Header với padding dùng clamp để thích ứng viewport */
+.site-header {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(6px);
+  background: color-mix(in hsl, var(--bg) 85%, #000 15% / 0.6);
+  border-bottom: 1px solid #1f2937; /* px minh hoạ đơn vị tuyệt đối */
+}
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(0.75rem, 1vw, 1rem) 0;
+}
+.brand {
+  font-size: var(--step-3);
+  font-weight: 700; /* variable font hỗ trợ nhiều cấp độ weight */
+  letter-spacing: 0.01em;
+}
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: var(--space-2);
+  font-size: var(--step--1);
+}
+.nav a:hover { color: var(--primary); }
+
+/* Card surface dùng em bên trong để kế thừa cỡ chữ cha */
+.card {
+  background: var(--surface);
+  border: 1px solid #1f2937;
+  border-radius: 0.75rem;
+  padding: 1.25em; /* em giúp nội dung co giãn theo font-size của card */
+  margin: var(--space-3) 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+.card h2, .card h3, .card h4 { margin-top: 0; }
+
+.highlight { color: var(--accent); font-weight: 600; }
+code { background: #0b1325; padding: 0.1em 0.35em; border-radius: 0.35em; }
+
+/* Grid minh hoạ nhiều đơn vị */
+.units-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-2);
+}
+.unit-box { padding: 1em; border-radius: 0.5rem; background: #0b1325; }
+.unit-box h4 { font-size: var(--step-1); margin: 0 0 0.5em; }
+.unit-box .sample { color: var(--muted); }
+
+/* Ví dụ cụ thể cho từng unit */
+.unit-box.px { width: 240px; }
+.unit-box.rem { font-size: 1rem; }
+.unit-box.em { font-size: 1.2em; }
+.unit-box.percent { width: 100%; }
+.unit-box.vwvh { min-height: 20vh; }
+.unit-box.clamp { font-size: clamp(1rem, 2vw + 0.5rem, 1.5rem); }
+
+/* Typography demo */
+.typography-demo .title {
+  font-size: var(--step-2);
+  font-weight: 650;
+}
+.typography-demo .lead {
+  font-size: var(--step-1);
+  line-height: 1.8;
+  letter-spacing: 0.005em; /* tinh chỉnh khoảng cách ký tự */
+}
+.typography-demo .note { font-weight: 600; color: var(--primary); }
+.typography-demo blockquote {
+  margin: var(--space-2) 0;
+  padding-left: var(--space-2);
+  border-left: 4px solid var(--accent); /* px cố định để tạo nhấn */
+  font-style: italic;
+}
+.typography-demo .small { font-size: var(--step--2); color: var(--muted); }
+
+/* Responsive hero dùng vh + fluid type */
+.responsive-hero {
+  min-height: 60vh; /* chiếm 60% chiều cao viewport */
+  display: grid;
+  place-items: center;
+  background: radial-gradient(1200px circle at 10% 20%, rgba(167,139,250,0.15), transparent),
+              radial-gradient(1000px circle at 90% 30%, rgba(34,211,238,0.15), transparent);
+  border-radius: 1rem;
+}
+.hero-content {
+  text-align: center;
+  padding: clamp(1rem, 3vw, 2.5rem);
+}
+.hero-content h2 { font-size: var(--step-3); }
+.hero-content p { color: var(--muted); font-size: var(--step-0); }
+.btn {
+  display: inline-block;
+  margin-top: var(--space-2);
+  padding: 0.65em 1.1em; /* dùng em để theo ngữ cảnh font của nút */
+  font-weight: 600;
+  color: #04121f;
+  background: var(--primary);
+  border-radius: 0.6rem;
+  box-shadow: 0 4px 16px rgba(34,211,238,0.35);
+  text-decoration: none;
+}
+.btn:hover { filter: brightness(1.1); }
+
+/* Columns layout dùng % và gap theo rem */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+.columns .col {
+  background: #0b1325;
+  border-radius: 0.75rem;
+  padding: 1em;
+}
+
+/* Breakpoint: chuyển về 1–2 cột trên màn hình nhỏ */
+@media (max-width: 800px) {
+  .columns { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .columns { grid-template-columns: 1fr; }
+}
+
+/* Footer */
+.site-footer { border-top: 1px solid #1f2937; margin-top: var(--space-4); }
+.site-footer .container { padding: var(--space-2) 0; color: var(--muted); font-size: var(--step--1); }
+
+body {
+    background-image: url("");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* ================== NAVBAR PHỤ (TRÊN CÙNG) ================== */
+.navbar0 {
+  /* Màu nền trắng */
+  background-color: #ffffff;
+
+  /* Chiếm toàn bộ chiều ngang màn hình */
+  width: 100%;
+}
+
+/* Menu chữ lớn (logo / tiêu đề) */
+.menu0 {
+  display: flex;                  /* Dùng flexbox */
+  justify-content: center;        /* Canh giữa ngang */
+  align-items: center;            /* Canh giữa dọc */
+  gap: 25px;                      /* Khoảng cách giữa các phần tử */
+  height: 30px;                   /* Chiều cao menu */
+  color: #e70b0b;                 /* Màu chữ đỏ */
+  font-size: 50px;                /* Cỡ chữ lớn */
+}
+
+/* ================== CÀI ĐẶT CHUNG CHO TRANG ================== */
+body {
+  /* Ảnh nền toàn trang */
+  background-image: url("images/hinh-nen-gau.jpg");
+
+  /* Ảnh phủ kín màn hình */
+  background-size: cover;
+
+  /* Không lặp ảnh */
+  background-repeat: no-repeat;
+
+  /* Căn ảnh nền ra giữa */
+  background-position: center;
+}
+
+/* ================== NAVBAR CHÍNH ================== */
+.navbar {
+  /* Màu nền hồng nhạt */
+  background-color: #ffb6c1;
+
+  /* Chiếm toàn bộ chiều ngang */
+  width: 100%;
+}
+
+/* ================== MENU CHÍNH ================== */
+.menu {
+  display: flex;                  /* Hiển thị dạng flex */
+  justify-content: center;        /* Canh giữa ngang */
+  align-items: center;            /* Canh giữa dọc */
+  gap: 25px;                      /* Khoảng cách các mục */
+  height: 65px;                   /* Chiều cao menu */
+}
+
+/* Link trong menu */
+.menu a {
+  color: white;                   /* Màu chữ trắng */
+  text-decoration: none;          /* Bỏ gạch chân */
+  font-size: 14px;                /* Cỡ chữ */
+  font-weight: 600;               /* Chữ đậm */
+  text-transform: uppercase;      /* Viết hoa */
+  padding: 10px 5px;              /* Khoảng cách trong */
+}
+
+/* Hiệu ứng khi rê chuột */
+.menu a:hover {
+  color: #ffffff;
+}
+
+/* ================== DROPDOWN MENU ================== */
+.dropdown {
+  position: relative;             /* Làm mốc cho menu con */
+}
+
+/* Menu con */
+.dropdown-menu {
+  position: absolute;             /* Hiển thị nổi */
+  top: 100%;                      /* Nằm dưới menu cha */
+  left: 0;
+  background: white;
+  min-width: 180px;
+  display: none;                  /* Ẩn mặc định */
+  flex-direction: column;         /* Xếp dọc */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* Link trong dropdown */
+.dropdown-menu a {
+  color: #333;
+  padding: 10px;
+  font-size: 13px;
+}
+
+/* Hover từng dòng dropdown */
+.dropdown-menu a:hover {
+  background: #ffe4ea;
+}
+
+/* Hover menu cha → hiện dropdown */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* ================== DANH SÁCH SẢN PHẨM ================== */
+.product-list {
+  display: flex;
+  flex-direction: row;            /* Sản phẩm nằm ngang */
+  justify-content: center;        /* Canh giữa */
+  gap: 40px;                      /* Khoảng cách */
+  padding: 40px 0;                /* Cách menu & footer */
+  flex-wrap: nowrap;              /* Không xuống dòng */
+}
+
+/* Thẻ sản phẩm */
+.product-card {
+  width: 260px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;            /* Bo góc */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  text-align: center;
+  color: #e70b0b;                 /* Màu chữ đỏ */
+}
+
+/* ================== CONTAINER CHUNG ================== */
+.container {
+  color: crimson;                 /* Màu chữ đỏ sẫm */
+}
+
+/* ================== BANNER ================== */
+.banner {
+  /* Ảnh nền banner */
+  background: url("images/hinh-nen-may-tinh-gau-dau 1234567890-=.jpg") center/cover;
+
+  color: rgb(13, 0, 255);          /* Màu chữ xanh */
+  text-align: center;             /* Canh giữa chữ */
+  padding: 80px;                  /* Khoảng cách trong */
+  font-size: 25px;                /* Cỡ chữ */
+}
+
+/* ================== TABLE (BẢNG SẢN PHẨM) ================== */
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;            /* Canh giữa bảng */
+  margin: 50px 0;
+}
+
+/* Khung ngoài cho cả phần table */
+.table-container {
+    width: 80%;
+    margin: 40px auto;
+    padding: 20px;
+    border: 2px solid #f4a6c1;
+    border-radius: 10px;
+    background-color: #fff5f8;
+}
+
+/* Tiêu đề bảng */
+.table-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #d63384;
+}
+
+/* Bảng sản phẩm */
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+/* Viền cho ô */
+.product-table th,
+.product-table td {
+    border: 1px solid #f4a6c1;
+    padding: 12px;
+}
+
+/* Header bảng */
+.product-table th {
+    background-color: #f8c1d9;
+    color: #333;
+}
+
+/* Hiệu ứng hover */
+.product-table tbody tr:hover {
+    background-color: #ffe3ee;
+}
+
+/* Chữ trong bảng */
+.product-table th,
+.product-table td {
+    color: red;
+}
+/*===================Video=========================*/
+.video-section {
+  text-align: center;
+  margin: 40px 0;
+}
+
+
+/* Ti*
