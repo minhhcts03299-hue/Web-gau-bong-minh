@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <!-- Head content -->
+</head>
+
+<body
+    data-rsssl="1"
+    class="home wp-singular page-template page-template-index page-template-index-php page page-id-25 wp-theme-willgroup woocommerce theme-willgroup woocommerce-js fixed"
+>
+    <!-- Google Tag Manager (noscript) -->
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div id="page" class="site"></div>
+
+    <div
+        class="widget_shopping_cart_live_region screen-reader-text"
+        role="status">
+    </div>
+</body>
+</html>
+
+<!--
+This website is like a Rocket, isn't it?
+Performance optimized by WP Rocket.
+Learn more: https://wp-rocket.me
+Debug: cached@1767606828
+-->

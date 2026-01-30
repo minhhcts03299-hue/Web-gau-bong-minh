@@ -1,0 +1,63 @@
+body{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e30f0fed;
+
+    background: 
+    radial-gradient(60% 60% at 50% 50%
+    #3a0926 0%,
+    #0d91b9 60%,
+    #d90c35 100%)
+}
+
+.container{
+    position: relative;
+    width: 400px;
+    height: 400px; 
+}
+
+
+.square {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 10px solid #0fb2e3;
+    box-sizing: border-box;
+    animation: Cuminh 20s linear infinite;
+}
+
+.s1{
+    width: 200%;
+    height: 200%;
+    animation-duration: 30s;
+}
+
+.s2{
+    width: 300%;
+    height: 300%;
+    border-color: aqua;
+    animation-duration: 20s;
+}
+
+.s3{
+    width: 400%;
+    height: 400%;
+    border-color: rgb;
+    animation-duration: 15S;
+}
+
+@keyframes Cuminh {
+    from{
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to{
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+.container:hover .square{
+    animation-play-state: paused;
+    cursor: pause;
+}

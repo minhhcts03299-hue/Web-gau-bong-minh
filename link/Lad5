@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tìm số chia hết cho 3</title>
+    <link rel="stylesheet" href="styleLab5.css" />
+</head>
+<body>
+    <div class="board">
+        <button class="ball">7</button>
+        <button class="ball firework">12</button>
+        <button class="ball">19</button>
+        <button class="ball firework">87</button>
+        <button class="ball">31</button>
+
+        <button class="ball firework">42</button>
+        <button class="ball">55</button>
+        <button class="ball">68</button>
+        <button class="ball firework">99</button>
+        <button class="ball">91</button>
+    </div>
+</body>
+</html>

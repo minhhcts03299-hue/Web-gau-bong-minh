@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e10a0a;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+.poem {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    width: 60%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.poem h1 {
+    color: #13ea69;
+}
+
+.poem p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.ToNenVang {
+    background-color: yellow;
+}

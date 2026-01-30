@@ -1,0 +1,147 @@
+
+:root{
+  --bg: #0f172a;         /* nền */
+  --ball: #111827;       /* nền nút */
+  --text: #e5e7eb;       /* màu chữ */
+  --ring: #334155;       /* viền */
+  /* màu pháo hoa */
+  --c1: #ff477e; 
+  --c2: #ffd166; 
+  --c3: #06d6a0; 
+  --c4: #118ab2;
+}
+
+* { box-sizing: border-box; }
+
+body{
+  min-height:100svh;
+  margin:0;
+  background: var(--bg);
+  color: var(--text);
+  display:grid;
+  place-items:center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.board{
+  display:grid;
+  grid-template-columns: repeat(5, min(12rem, 18vw));
+  gap: clamp(10px, 2vw, 18px);
+  justify-content:center;
+  padding: clamp(12px, 3vw, 24px);
+}
+
+/* Nút hình tròn */
+.ball{
+  position: relative;
+  width: min(12rem, 18vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid var(--ring);
+  background:
+    radial-gradient(120% 120% at 30% 30%, #1f2937 0 45%, #0b1220 100%);
+  color: var(--text);
+  display:grid;
+  place-items:center;
+  font-weight: 600;
+  font-size: clamp(20px, 3.2vw, 34px);
+  letter-spacing:.5px;
+  cursor: default;
+  overflow: visible;   /* cho pháo hoa nở tràn ra ngoài */
+  isolation: isolate;  /* tách lớp hiệu ứng */
+  user-select:none;
+  transition: transform .12s ease; /* chỉ tạo cảm giác nhích nhẹ cho nút có hiệu ứng */
+}
+
+/* ====== CHỈ nút có .firework mới có hiệu ứng ====== */
+.ball.firework { cursor: pointer; }
+
+/* Lớp pháo tia */
+.ball.firework::before{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius: 50%;
+  /* bánh xe tia bằng conic-gradient, trộn 4 màu */
+  background:
+    conic-gradient(
+      from 0deg,
+      var(--c1) 0 16deg, transparent 16deg 30deg,
+      var(--c2) 30deg 46deg, transparent 46deg 60deg,
+      var(--c3) 60deg 76deg, transparent 76deg 90deg,
+      var(--c4) 90deg 106deg, transparent 106deg 120deg,
+      var(--c1) 120deg 136deg, transparent 136deg 150deg,
+      var(--c2) 150deg 166deg, transparent 166deg 180deg,
+      var(--c3) 180deg 196deg, transparent 196deg 210deg,
+      var(--c4) 210deg 226deg, transparent 226deg 240deg,
+      var(--c1) 240deg 256deg, transparent 256deg 270deg,
+      var(--c2) 270deg 286deg, transparent 286deg 300deg,
+      var(--c3) 300deg 316deg, transparent 316deg 330deg,
+      var(--c4) 330deg 346deg, transparent 346deg 360deg
+    );
+  /* khoét rỗng tâm và ngọn tia để trông như pháo hoa nổ */
+  -webkit-mask:
+    radial-gradient(circle at center,
+      transparent 0 18%, black 19% 64%, transparent 65% 100%);
+          mask:
+    radial-gradient(circle at center,
+      transparent 0 18%, black 19% 64%, transparent 65% 100%);
+  opacity: 0;
+  transform: scale(.35) rotate(0deg);
+  pointer-events:none;
+}
+
+/* Lớp hạt tròn */
+.ball.firework::after{
+  content:"";
+  position:absolute;
+  left:50%; top:50%;
+  width: 6px; height: 6px;
+  border-radius:50%;
+  translate: -50% -50%;
+  background: var(--c1);
+  /* nhiều hạt bằng box-shadow (mỗi hạt là 1 “bóng”) */
+  box-shadow:
+    0 -24px var(--c2),
+    20px -10px var(--c3),
+    24px 0 var(--c4),
+    18px 16px var(--c1),
+    0 24px var(--c2),
+    -18px 16px var(--c3),
+    -24px 0 var(--c4),
+    -20px -10px var(--c1),
+    12px -22px var(--c2),
+    -12px 22px var(--c3);
+  opacity: 0;
+  pointer-events:none;
+  transform: scale(.6);
+}
+
+/* Kích hoạt khi hover CHỈ trên .firework */
+.ball.firework:hover{
+  transform: translateY(-2px);
+}
+.ball.firework:hover::before{
+  animation: rays .7s cubic-bezier(.15,.75,.25,1) forwards;
+}
+.ball.firework:hover::after{
+  animation: dots .7s ease-out forwards;
+}
+
+@keyframes rays{
+  0%   { opacity:0; transform: scale(.35) rotate(0deg);   }
+  25%  { opacity:1; }
+  100% { opacity:0; transform: scale(1.8) rotate(45deg); }
+}
+@keyframes dots{
+  0%   { opacity:0; transform: translate(0,0) scale(.6); filter: blur(0px); }
+  30%  { opacity:1; }
+  100% { opacity:0; transform: translate(0,0) scale(1.8); filter: blur(1px); }
+}
+
+/* Tôn trọng người dùng giảm chuyển động */
+@media (prefers-reduced-motion: reduce){
+  .ball.firework:hover::before,
+  .ball.firework:hover::after,
+  .ball.firework{ animation: none !important; transition: none !important; }
+}
