@@ -203,12 +203,13 @@ body {
   height: 30px;                   /* Chiều cao menu */
   color: #e70b0b;                 /* Màu chữ đỏ */
   font-size: 50px;                /* Cỡ chữ lớn */
+  
 }
 
 /* ================== CÀI ĐẶT CHUNG CHO TRANG ================== */
 body {
   /* Ảnh nền toàn trang */
-  background-image: url("images/hinh-nen-gau.jpg");
+  background-image: url("images/nen\ trang.webp");
 
   /* Ảnh phủ kín màn hình */
   background-size: cover;
@@ -230,28 +231,35 @@ body {
 }
 
 /* ================== MENU CHÍNH ================== */
+/* ================== MENU CHÍNH (GIM LẠI) ================== */
 .menu {
-  display: flex;                  /* Hiển thị dạng flex */
-  justify-content: center;        /* Canh giữa ngang */
-  align-items: center;            /* Canh giữa dọc */
-  gap: 25px;                      /* Khoảng cách các mục */
-  height: 65px;                   /* Chiều cao menu */
+    background: #ffb6c1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    height: 65px;
+
+    position: sticky;   /* GIM MENU */
+    top: 0;             /* DÍNH TRÊN CÙNG */
+    z-index: 9999;      /* NỔI TRÊN MỌI THÀNH PHẦN */
 }
 
 /* Link trong menu */
 .menu a {
-  color: white;                   /* Màu chữ trắng */
-  text-decoration: none;          /* Bỏ gạch chân */
-  font-size: 14px;                /* Cỡ chữ */
-  font-weight: 600;               /* Chữ đậm */
-  text-transform: uppercase;      /* Viết hoa */
-  padding: 10px 5px;              /* Khoảng cách trong */
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px 5px;
 }
 
-/* Hiệu ứng khi rê chuột */
+/* Hover menu */
 .menu a:hover {
-  color: #ffffff;
+    background: #ff8fa3;
 }
+
 
 /* ================== DROPDOWN MENU ================== */
 .dropdown {
@@ -383,6 +391,123 @@ body {
 .video-section {
   text-align: center;
   margin: 40px 0;
+  color: #e70b0b;
+}
+
+.hottrend {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.hottrend h2 {
+    color: #ff5c7a;       /* màu hồng chữ */
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hottrend .line {
+    width: 80%;           /* độ dài đường kẻ */
+    height: 2px;
+    background-color: #00cfff; /* màu xanh */
+    margin: 0 auto;       /* căn giữa */
+    border-radius: 5px;
+}
+
+/* HEADER */
+.top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: #fff;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #00b7b7;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.search-box {
+    display: flex;
+    width: 420px;
+    border: 2px solid #ff8fa3;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    outline: none;
+}
+
+.search-box button {
+    background: #fff;
+    border: none;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.hotline {
+    font-size: 20px;
+    color: #ff6b81;
+    font-weight: bold;
+}
+
+/* MENU */
+.menu {
+    background: #ffb6c1;
+    display: flex;
+    justify-content: center;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 22px;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    background: #ff8fa3;
+}
+
+/* KHỐI CHUNG: chia 2 cột trái - phải */
+.contact-section {
+    display: flex;              /* Chia layout ngang */
+    gap: 30px;                  /* Khoảng cách 2 cột */
+    padding: 40px;
+}
+
+/* BÊN TRÁI: thông tin / chú thích */
+.contact-info {
+    width: 35%;                 /* Chiếm 35% chiều ngang */
+    background: #fff5f7;        /* Nền hồng nhạt */
+    padding: 25px;
+    border-radius: 10px;        /* Bo góc */
+}
+
+/* Tiêu đề */
+.contact-info h2 {
+    color: #ff012f;
+    margin-bottom: 15px;
+}
+
+/* Nội dung từng dòng */
+.contact-info p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #e70b0b;
 }
 
 
